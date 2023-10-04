@@ -1,35 +1,84 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { createElement } from 'react'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+// ### Ejemplo con   --> se visualiza como código JSX transpilado por BABEL ###
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+const FormularioBusqueda = () => {
+  return createElement(
+    "form",
+    { action: "/search", emthod: "GET" },
+    createElement(
+      "input",
+      { type: "search", placeholder: "Términos de búsqueda" }
+    ),
+    createElement("button", { type: "submit" }, "Buscar")
+  );
 }
+
+const Cabecera = () => {
+  return createElement(
+    "div",
+    null,
+    createElement("h1", null, "Mi primera app React"),
+    createElement(FormularioBusqueda)
+  );
+}
+
+const Desplegable = (props) => {
+  return createElement(
+    "details",
+    null,
+    createElement("summary", null, props.titulo),
+    createElement("p", null, props.contenido)
+  );
+}
+
+function App() {
+  return createElement(
+    "div",
+    { className: "App" },
+    createElement(Cabecera),
+    createElement(Desplegable, { 
+      titulo: "Título 1", 
+      contenido: "Contenido 1" 
+    }),
+    createElement(Desplegable, {
+      titulo: "Título 2",
+      contenido: "Contenido 2"
+    })
+  );
+}
+
+// ### Ejemplo con sintaxis JSX ###
+/*
+const FormularioBusqueda = () => {
+  return <form action='search' method='GET'>
+    <input type="search" placeholder="Términos de búsqueda" />
+    <button type="submit">Buscar</button>
+  </form>
+}
+
+const Cabecera = () => {
+  return <div>
+    <h1>Mi primera app React</h1>
+    <FormularioBusqueda />
+  </div>
+}
+
+const Desplegable = (props) => {
+  return <details>
+    <summary>{props.titulo}</summary>
+    <p>{props.contenido}</p>
+  </details>
+}
+
+function App() {
+  return <div className='App'>
+    <Cabecera />
+    <Desplegable titulo="Título 1" contenido="Contenido 1" />
+    <Desplegable titulo="Título 2" contenido="Contenido 2" />
+  </div>
+}
+*/
 
 export default App
