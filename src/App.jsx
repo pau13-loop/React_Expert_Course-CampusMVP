@@ -60,7 +60,6 @@ function App() {
         {/* LESSON 3 */}
         <FormularioSignup />
       </div>
-
     </ContextoTema.Provider>
   );
 }
